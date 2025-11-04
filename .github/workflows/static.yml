@@ -11,7 +11,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -22,28 +22,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  minify:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: auto minify the files
-      uses: nizarmah/auto-minify@v3
-      with:
-        output: 'minified'
-
-    - name: auto commit the minified files
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: "bot: Add auto minified files"
-
   # Single deploy job since we're just deploying
   deploy:
-    needs: minify
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -53,15 +33,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Download minified artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: minified
-          path: .
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'minified'
+          path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
