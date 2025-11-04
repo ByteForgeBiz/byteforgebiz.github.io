@@ -34,7 +34,7 @@ jobs:
     - name: auto minify the files
       uses: nizarmah/auto-minify@v3
       with:
-        output: minified
+        output: 'minified'
 
     - name: auto commit the minified files
       uses: stefanzweifel/git-auto-commit-action@v5
@@ -61,8 +61,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          path: 'minified'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
