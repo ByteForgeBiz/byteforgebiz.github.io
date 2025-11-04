@@ -283,6 +283,12 @@ h1, h2, h3, h4, h5, h6 {
     animation: glow 2s ease-in-out infinite alternate;
 }
 
+.hero-logo {
+    max-width: 300px;
+    height: auto;
+    filter: drop-shadow(0 0 10px var(--text-secondary-rgba-50));
+}
+
 @keyframes glow {
     from { text-shadow: 0 0 20px var(--text-secondary-rgba-30); }
     to { text-shadow: 0 0 30px var(--text-secondary-rgba-60), 0 0 40px var(--text-secondary-rgba-40); }
